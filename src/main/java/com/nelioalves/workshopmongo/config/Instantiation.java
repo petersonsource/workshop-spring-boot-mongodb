@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import com.mongodb.client.model.geojson.Position;
 import com.nelioalves.workshopmongo.domain.Post;
 import com.nelioalves.workshopmongo.domain.User;
+import com.nelioalves.workshopmongo.dto.AuthorDTO;
 import com.nelioalves.workshopmongo.repository.PostRepository;
 import com.nelioalves.workshopmongo.repository.UserRepository;
 
@@ -38,10 +39,11 @@ public class Instantiation implements CommandLineRunner{
 		User bob = new User(null, "Bob Grey", "bob@gmail.com");	
 		User rick = new User(null, "Rick James", "rj@gmail.com");
 		
-		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo", maria);
-		Post post2 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo", maria);
-
 		userRepository.saveAll(Arrays.asList(maria, alex, bob, rick));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar para São Paulo", new AuthorDTO(maria));
+	
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 
